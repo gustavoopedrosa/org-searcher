@@ -1,4 +1,5 @@
 import React from "react"
+import Card from "../../components/Card/card"
 import "./repos.scss"
 
 const Repos = () => {
@@ -12,13 +13,20 @@ const Repos = () => {
                     />
                 </div>
                 <div className="org__details">
-                    <h2 className="org__details__name">Meta</h2>
+                    <h1 className="org__details__name">Meta</h1>
                     <p className="org__details__description">We are working to build community through open source technology. NB: members must have two-factor auth.</p>
                     <span className="org__details__location">Menlo Park, California</span>
                     <a className="org__details__blog" href="https://opensource.fb.com">https://opensource.fb.com</a>
                     <a className="org__details__twitter" href="#">@MetaOpenSource</a>
                 </div>
             </header>
+            <div className="repos">
+                <h2 className="repos__title">Repositórios</h2>
+                <ul className="repos__list">
+                    <Card/>
+                    <Card/>
+                </ul>
+            </div>
         </main>
     )
 }

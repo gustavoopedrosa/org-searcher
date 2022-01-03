@@ -6,7 +6,7 @@ import Repos from './pages/Repos/repos';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Repos />
+    <Home />
   </React.StrictMode>,
   document.getElementById('root')
 );
