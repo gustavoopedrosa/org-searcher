@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100vw;
+    height: 260px;
+    background-color: lightgrey;
+}
+
+.org {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    height: 100%;
+    width: 100%;
+
+    &__img {
+
+        img {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            border-radius: 1rem;
+        }
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+    }
+}
