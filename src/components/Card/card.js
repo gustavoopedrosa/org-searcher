@@ -16,11 +16,11 @@ const Card = () => {
                         Javascript
                     </span>
                     <a className="repo__details__link" href="#">
-                        <img src={starIcon} />
+                        <img src={starIcon} alt="Ícone de estrela" />
                         180k
                     </a>
                     <a className="repo__details__link" href="#">
-                        <img src={branchIcon} />
+                        <img src={branchIcon} alt="Ícone de branch"/>
                         36.6k
                     </a>
                 </div>
