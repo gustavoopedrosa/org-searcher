@@ -1,7 +1,13 @@
 import React from "react"
-import "./home.scss"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+
+import "./home.scss"
+
+import arrowIcon from "../../assets/seta-direita.png"
+
+import Header from "../../components/Header/header"
+
 
 const Home = () => {
     const navigate = useNavigate()
@@ -35,27 +41,35 @@ const Home = () => {
     }
 
     return (
-        <main className="main">
-            <input
-                onChange={handleChange}
-                className="main__input"
-                type="text"
-                placeholder="Digite o nome da organização"
-                title="Digite o nome da organização"
-                onKeyDown={handleKeyDown}
-            />
-            {!isOrgTrue === true &&
-                <span className="main__error">
-                    Organização não encontrada, verifique e tente novamente.
-                </span>
-            }
-            <button
-                className="main__button"
-                onClick={handleClick}
-            >
-                Pesquisar
-            </button>
-        </main>
+        <div>
+            <Header/>
+            <main className="main">
+                <p className="main__description">
+                    Encontre os repositórios de qualquer organização no Github
+                </p>
+                <div className="main__search">
+                    <input
+                        onChange={handleChange}
+                        className="main__search__input"
+                        type="text"
+                        placeholder="Digite o nome da organização"
+                        title="Digite o nome da organização"
+                        onKeyDown={handleKeyDown}
+                    />
+                    <button
+                        className="main__search__button"
+                        onClick={handleClick}
+                    >
+                        <img src={arrowIcon}/>
+                    </button>
+                </div>
+                {!isOrgTrue === true &&
+                    <span className="main__error">
+                        Organização não encontrada, verifique e tente novamente.
+                    </span>
+                }
+            </main>
+        </div>
     )
 }
 
