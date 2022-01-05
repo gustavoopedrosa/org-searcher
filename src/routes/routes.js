@@ -8,7 +8,7 @@ const Routes = () => {
         <div>
             <Switch>
                 <Route element = { <Home/> } path="/" exact/>
-                <Route element = { <Repos/> } path="/repos"/>
+                <Route element = { <Repos/> } path=":repos"/>
             </Switch>
         </div>
     )

@@ -4,24 +4,28 @@ import circIcon from "../../assets/circulo.png"
 import starIcon from "../../assets/estrela.png"
 import branchIcon from "../../assets/branch.png"
 
-const Card = () => {
+const Card = (repo) => {
+    const repos = repo.repo
+
     return (
         <li className="repo">
-                <a className="repo__name">react</a>
-                <span className="repo__privacy">Público</span>
-                <p className="repo__description">A declarative, efficient, and flexible JavaScript library for building user interfaces.</p>
+                <a className="repo__name" href={repos.html_url} target="_blank">{repos.name}</a>
+                {repos.private === false &&
+                    <span className="repo__privacy">Público</span>
+                }
+                <p className="repo__description">{repos.description}</p>
                 <div className="repo__details">
                     <span className="repo__details__lang">
                         <img src={circIcon} />
-                        Javascript
+                        {repos.language}
                     </span>
-                    <a className="repo__details__link" href="#">
+                    <a className="repo__details__link">
                         <img src={starIcon} alt="Ícone de estrela" />
-                        180k
+                        {repos.stargazers_count}
                     </a>
-                    <a className="repo__details__link" href="#">
+                    <a className="repo__details__link">
                         <img src={branchIcon} alt="Ícone de branch"/>
-                        36.6k
+                        {repos.forks}
                     </a>
                 </div>
         </li>

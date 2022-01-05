@@ -17,6 +17,7 @@
         color: blue;
         line-height: 1.5rem;
         flex-grow: 1;
+        text-decoration: none;
     }
 
     &__privacy {
@@ -28,6 +29,7 @@
 
     &__description {
         font-size: 1.2rem;
+        flex-basis: 100%;
     }
 
     &__details {

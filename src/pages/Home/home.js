@@ -1,11 +1,13 @@
 import React from "react"
 import "./home.scss"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-
+    const navigate = useNavigate()
     const [inputValue, setInputValue] = useState('')
-    const [orgObject, setOrgObject] = useState('')
+    const [isOrgTrue, setIsOrgTrue] = useState(true)
+
 
     function handleChange(e) {
         setInputValue(e.target.value)
@@ -14,17 +16,22 @@ const Home = () => {
     function handleClick() {
         fetch(`https://api.github.com/orgs/${inputValue}`)
             .then(response => response.json())
-            .then(responseJson => setOrgObject(responseJson))
+            .then(responseJson => validateOrg(responseJson))
+    }
+
+    function handleKeyDown(e) {
+        if(e.code === 'Enter') {
+            handleClick()
+        }
+        return
     }
 
     function validateOrg(orgObject) {
         if (orgObject.type === 'Organization') {
-            const isTrue = 'repos'
-            return isTrue
-        } else {
-            const isFalse = '#'
-            return isFalse
+            navigate(`/${inputValue}`)
         }
+
+        return setIsOrgTrue(false)
     }
 
     return (
@@ -35,17 +42,19 @@ const Home = () => {
                 type="text"
                 placeholder="Digite o nome da organização"
                 title="Digite o nome da organização"
+                onKeyDown={handleKeyDown}
             />
-            <span className="main__span">
-                Organização não encontrada, verifique o nome e tente novamente.
-            </span>
-            <a
+            {!isOrgTrue === true &&
+                <span className="main__error">
+                    Organização não encontrada, verifique e tente novamente.
+                </span>
+            }
+            <button
                 className="main__button"
                 onClick={handleClick}
-                href={validateOrg(orgObject)}
             >
                 Pesquisar
-            </a>
+            </button>
         </main>
     )
 }
