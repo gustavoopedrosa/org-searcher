@@ -7,7 +7,7 @@ import "./home.scss"
 import arrowIcon from "../../assets/seta-direita.png"
 
 import Header from "../../components/Header/header"
-
+import Footer from "../../components/Footer/footer"
 
 const Home = () => {
     const navigate = useNavigate()
@@ -41,7 +41,7 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <div className="wrapper">
             <Header/>
             <main className="main">
                 <p className="main__description">
@@ -69,6 +69,7 @@ const Home = () => {
                     </span>
                 }
             </main>
+            <Footer/>
         </div>
     )
 }

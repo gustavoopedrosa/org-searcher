@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react"
 import Card from "../../components/Card/card"
+import Header from "../../components/Header/header"
+import Footer from "../../components/Footer/footer"
+import { useParams } from "react-router-dom"
 
 import "./repos.scss"
 
@@ -7,8 +10,6 @@ import locationIcon from "../../assets/local.png"
 import linkIcon from "../../assets/link.png"
 import twitterIcon from "../../assets/twitter.png"
 
-import { useParams } from "react-router-dom"
-import Header from "../../components/Header/header"
 
 const Repos = () => {
     const org = useParams().repos
@@ -37,7 +38,7 @@ const Repos = () => {
     return (
         <div>
             <Header repos={true} />
-            <main className="wrapper">
+            <main className="container">
                 <header className="org">
                     <div className="org__img">
                         <img
@@ -86,6 +87,7 @@ const Repos = () => {
                     </ul>
                 </div>
             </main>
+            <Footer/>
         </div>
     )
 }

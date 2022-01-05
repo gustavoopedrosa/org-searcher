@@ -1,11 +1,18 @@
-.main {
+.wrapper {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
-    padding: 5rem 3rem;
+    height: 100vh;
+}
+
+.main {
+    flex-grow: 1;
+    width: 100vw;
+    padding: 0 3rem 7rem 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
 
     &__description {
         font-size: 2rem;
@@ -29,6 +36,7 @@
             flex-grow: 1;
             font-size: 1.6rem;
             padding: 0 1rem;
+            background-color: transparent;
         }
     
 
