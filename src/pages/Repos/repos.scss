@@ -55,7 +55,6 @@
             flex-direction: row;
             align-items: center;
             gap: .5rem;
-            flex-basis: 0;
             font-size: 1.2rem;
             text-decoration: none;
             color: black;
@@ -72,6 +71,9 @@
     max-width: 1280px;
     margin: 0 auto;
     padding: 1.5rem 2rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+
 
     &__title {
         font-size: 1.8rem;
@@ -83,12 +85,18 @@
         list-style: none;
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 2rem;
     }
 }
 
 @media screen and (min-width: 768px) {
-    .org {
+    .repos {
 
+        &__list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
     }
 }
