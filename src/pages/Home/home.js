@@ -26,16 +26,14 @@ const Home = () => {
     }
 
     function handleKeyDown(e) {
-        if(e.code === 'Enter') {
+        if(e.keyCode === 13) {
             handleClick()
         }
         return
     }
 
     function validateOrg(orgObject) {
-        if (orgObject.type === 'Organization') {
-            navigate(`/${inputValue}`)
-        }
+        if (orgObject.type === 'Organization') navigate(`/${inputValue}`)
 
         return setIsOrgTrue(false)
     }
