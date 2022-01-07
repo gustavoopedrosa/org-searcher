@@ -1,5 +1,5 @@
 import React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import "./home.scss"
@@ -13,6 +13,11 @@ const Home = () => {
     const navigate = useNavigate()
     const [inputValue, setInputValue] = useState('')
     const [isOrgTrue, setIsOrgTrue] = useState(true)
+    const [orgInfos, setOrgInfos] = useState({})
+
+    useEffect(() => {
+        localStorage.removeItem('orgInfos')
+    }, [])
 
 
     function handleChange(e) {
@@ -23,24 +28,27 @@ const Home = () => {
         fetch(`https://api.github.com/orgs/${inputValue}`)
             .then(response => response.json())
             .then(responseJson => validateOrg(responseJson))
+            .then(responseJson => setOrgInfos(responseJson))
     }
 
     function handleKeyDown(e) {
-        if(e.keyCode === 13) {
+        if (e.keyCode === 13) {
             handleClick()
         }
         return
     }
 
     function validateOrg(orgObject) {
-        if (orgObject.type === 'Organization') navigate(`/${inputValue}`)
+        if (orgObject.type === 'Organization') {
+            navigate(`/${inputValue}`)
+        }
 
         return setIsOrgTrue(false)
     }
 
     return (
         <div className="wrapper">
-            <Header/>
+            <Header />
             <main className="main">
                 <p className="main__description">
                     Encontre os repositórios de qualquer organização no Github
@@ -58,7 +66,7 @@ const Home = () => {
                         className="main__search__button"
                         onClick={handleClick}
                     >
-                        <img src={arrowIcon}/>
+                        <img src={arrowIcon} />
                     </button>
                 </div>
                 {!isOrgTrue === true &&
@@ -67,7 +75,7 @@ const Home = () => {
                     </span>
                 }
             </main>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

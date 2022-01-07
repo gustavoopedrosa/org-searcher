@@ -1,5 +1,10 @@
+.repos-wrapper {
+    width: 100%;
+}
+
 .container {
-    width: 100vw;
+    width: 100%;
+    min-height: 100vh;
 
     header {
         background-color: #F6F8FA;
@@ -73,6 +78,7 @@
     padding: 1.5rem 2rem 1.5rem 2rem;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 
 
     &__title {
@@ -90,12 +96,33 @@
     }
 }
 
+.pagination {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+
+    &__prev, &__next {
+        color: blue;
+        text-decoration: none;
+    }
+
+    &__prev:hover, &__next:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .repos {
 
         &__list {
             flex-direction: row;
             flex-wrap: wrap;
+            justify-content: space-between;
             gap: 3rem;
         }
     }

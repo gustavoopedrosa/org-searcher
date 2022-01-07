@@ -12,31 +12,34 @@ import twitterIcon from "../../assets/twitter.png"
 
 
 const Repos = () => {
-    const org = useParams().repos
-    const [orgObject, setOrgObject] = useState('')
+    const orgName = useParams().repos
+    const [orgObject, setOrgObject] = useState({})
     const [orgRepos, setOrgRepos] = useState([])
+    const [pageCounter, setPageCounter] = useState(1)
 
     useEffect(() => {
-        findOrg(org)
-        findOrgRepos(org)
+        findOrg()
     }, [])
-
-
-    function findOrg(orgTerm) {
-        fetch(`https://api.github.com/orgs/${orgTerm}`)
+    
+    useEffect(() => {
+        findOrgRepos(orgName)
+    }, [pageCounter])
+    
+    function findOrg() {
+        fetch(`https://api.github.com/orgs/${orgName}`)
             .then(response => response.json())
             .then(responseJson => setOrgObject(responseJson))
     }
 
-    function findOrgRepos(orgTerm) {
-        fetch(`https://api.github.com/orgs/${orgTerm}/repos`)
+    function findOrgRepos(orgName) {
+        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=10`)
             .then(response => response.json())
             .then(responseJson => setOrgRepos(responseJson))
     }
 
 
     return (
-        <div>
+        <div className="repos-wrapper">
             <Header repos={true} />
             <main className="container">
                 <header >
@@ -88,8 +91,20 @@ const Repos = () => {
                         }
                     </ul>
                 </div>
+                <ul className="pagination">
+                    {pageCounter !== 1 &&
+                        <li className="pagination__prev" onClick={() => {
+                            if (pageCounter > 1) setPageCounter(pageCounter - 1)
+                        }}>Anterior</li>
+                    }
+                    {orgRepos.length === 10 &&
+                        <li className="pagination__next" onClick={() => {
+                            if (pageCounter >= 1) setPageCounter(pageCounter + 1)
+                        }}>Próxima</li>
+                    }
+                </ul>
             </main>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
