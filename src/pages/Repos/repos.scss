@@ -108,6 +108,7 @@
     &__prev, &__next {
         color: blue;
         text-decoration: none;
+        user-select: none;
     }
 
     &__prev:hover, &__next:hover {
