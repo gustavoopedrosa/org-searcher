@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import "./header.scss"
 
 import iconSearcher from "../../assets/search32.png"
-import iconReturn from "../../assets/seta-esquerda.png"
+import iconReturn from "../../assets/seta-esquerda-branca.png"
 
 const Header = ({repos}) => {
     const navigate = useNavigate()

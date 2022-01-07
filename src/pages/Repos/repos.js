@@ -39,41 +39,43 @@ const Repos = () => {
         <div>
             <Header repos={true} />
             <main className="container">
-                <header className="org">
-                    <div className="org__img">
-                        <img
-                            src={orgObject.avatar_url}
-                            alt="Logo da organização"
-                        />
-                    </div>
-                    <div className="org__details">
-                        <h1 className="org__details__name">{orgObject.name}</h1>
-                        <p className="org__details__description">{orgObject.description}</p>
-                        {orgObject.location !== null &&
-                            <span className="org__details__location">
-                                <img src={locationIcon} alt="Ícone que simboliza um local" />
-                                {orgObject.location}
-                            </span>
+                <header >
+                    <div className="org">
+                        <div className="org__img">
+                            <img
+                                src={orgObject.avatar_url}
+                                alt="Logo da organização"
+                            />
+                        </div>
+                        <div className="org__details">
+                            <h1 className="org__details__name">{orgObject.name}</h1>
+                            <p className="org__details__description">{orgObject.description}</p>
+                            {orgObject.location !== null &&
+                                <span className="org__details__location">
+                                    <img src={locationIcon} alt="Ícone que simboliza um local" />
+                                    {orgObject.location}
+                                </span>
 
-                        }
-                        {orgObject.blog !== null &&
-                            <a className="org__details__blog" href={orgObject.blog} target="_blank">
-                                <img src={linkIcon} alt="Ícone que simboliza um link" />
-                                {orgObject.blog}
-                            </a>
+                            }
+                            {orgObject.blog !== null &&
+                                <a className="org__details__blog" href={orgObject.blog} target="_blank">
+                                    <img src={linkIcon} alt="Ícone que simboliza um link" />
+                                    {orgObject.blog}
+                                </a>
 
-                        }
-                        {orgObject.twitter_username !== null &&
-                            <a
-                                className="org__details__twitter"
-                                href={`https://twitter.com/${orgObject.twitter_username}`}
-                                target="_blank"
-                            >
-                                <img src={twitterIcon} alt="Ícone do twitter" />
-                                @{orgObject.twitter_username}
-                            </a>
+                            }
+                            {orgObject.twitter_username !== null &&
+                                <a
+                                    className="org__details__twitter"
+                                    href={`https://twitter.com/${orgObject.twitter_username}`}
+                                    target="_blank"
+                                >
+                                    <img src={twitterIcon} alt="Ícone do twitter" />
+                                    @{orgObject.twitter_username}
+                                </a>
 
-                        }
+                            }
+                        </div>
                     </div>
                 </header>
                 <div className="repos">

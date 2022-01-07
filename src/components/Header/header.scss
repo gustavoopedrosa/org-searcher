@@ -1,12 +1,12 @@
 .header {
     width: 100vw;
-    background-color: lightgray;
+    background-color: #24292F;
     display: flex;
     flex-direction: row;
     padding: 2rem 2rem 2rem 2rem;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid gray;
+    color: white;
     
     &__return {
         width: 24px;
@@ -30,4 +30,14 @@
         }
     }
 
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        padding: 2rem 10rem 2rem 10rem;
+
+        &__return {
+            display: none;
+        }
+    }
 }

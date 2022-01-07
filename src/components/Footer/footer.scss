@@ -1,18 +1,22 @@
 .footer {
     width: 100vw;
     text-align: center;
-    border-top: 1px solid gray;
+    border-top: 1px solid lightgray;
     padding: 1rem;
-    background-color: lightgray;
+    background-color: #F6F8FA;
+    color: black;
+    position: fixed;
+    left: 0;
+    bottom: 0;
     
     
     &__contact {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
 
         a {
             text-decoration: none;
-            color: black;
             font-weight: 500;
+            color: black;
         }
     }   
 }
