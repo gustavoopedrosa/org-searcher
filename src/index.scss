@@ -1,10 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap');
 
+//color variables
+
+:root {
+  --gray: #363636;
+  --green: #12B9AF;
+  --dark-green: #0D7670;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
+  color: white;
 }
 
 html {
@@ -22,6 +31,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--gray);
 }
 
 code {

@@ -9,6 +9,7 @@ import "./repos.scss"
 import locationIcon from "../../assets/local.png"
 import linkIcon from "../../assets/link.png"
 import twitterIcon from "../../assets/twitter.png"
+import arrowIcon from "../../assets/seta-direita.png"
 
 
 const Repos = () => {
@@ -16,73 +17,139 @@ const Repos = () => {
     const [orgObject, setOrgObject] = useState({})
     const [orgRepos, setOrgRepos] = useState([])
     const [pageCounter, setPageCounter] = useState(1)
+    const [inputValue, setInputValue] = useState('')
+    const [isSearch, setIsSearch] = useState(false)
+    const [errorMsg, setErrorMsg] = useState(false)
+    const [returnButton, setReturnButton] = useState(false)
 
     useEffect(() => {
         findOrg()
     }, [])
-    
+
     useEffect(() => {
-        findOrgRepos(orgName)
+        findOrgRepos()
     }, [pageCounter])
-    
+
+    useEffect(() => {
+        findOneRepo()
+    }, [isSearch])
+
     function findOrg() {
-        fetch(`https://api.github.com/orgs/${orgName}`)
+        fetch(`https://api.github.com/orgs/${orgName}`, {
+            headers: {
+                authorization: "token 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"
+            }
+        })
             .then(response => response.json())
             .then(responseJson => setOrgObject(responseJson))
     }
 
-    function findOrgRepos(orgName) {
-        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=10`)
+    function findOrgRepos() {
+        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=12&`, {
+            headers: {
+                authorization: "token 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"
+            }
+        })
             .then(response => response.json())
             .then(responseJson => setOrgRepos(responseJson))
+        setErrorMsg(false)
+        setReturnButton(false)
     }
 
+    function findOneRepo() {
+        if (isSearch) {
+            fetch(`https://api.github.com/repos/${orgName}/${inputValue}`, {
+                headers: {
+                    authorization: "token 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"
+                }
+            })
+                .then(setIsSearch(false))
+                .then(response => response.json())
+                .then(responseJson => validateRepo([responseJson]))
+        }
+    }
+
+    function validateRepo(repo) {
+        if (repo[0].name === inputValue) {
+            setOrgRepos(repo)
+            setErrorMsg(false)
+            setReturnButton(true)
+        } else if (inputValue === '') {
+            findOrgRepos()
+        } else {
+            setErrorMsg(true)
+        }
+
+    }
 
     return (
         <div className="repos-wrapper">
             <Header repos={true} />
             <main className="container">
-                <header >
-                    <div className="org">
-                        <div className="org__img">
-                            <img
-                                src={orgObject.avatar_url}
-                                alt="Logo da organização"
-                            />
-                        </div>
-                        <div className="org__details">
-                            <h1 className="org__details__name">{orgObject.name}</h1>
-                            <p className="org__details__description">{orgObject.description}</p>
-                            {orgObject.location !== null &&
-                                <span className="org__details__location">
-                                    <img src={locationIcon} alt="Ícone que simboliza um local" />
-                                    {orgObject.location}
-                                </span>
-
-                            }
-                            {orgObject.blog !== null &&
-                                <a className="org__details__blog" href={orgObject.blog} target="_blank">
-                                    <img src={linkIcon} alt="Ícone que simboliza um link" />
-                                    {orgObject.blog}
-                                </a>
-
-                            }
-                            {orgObject.twitter_username !== null &&
-                                <a
-                                    className="org__details__twitter"
-                                    href={`https://twitter.com/${orgObject.twitter_username}`}
+                <header className="org">
+                    <div className="org__img">
+                        <img
+                            src={orgObject.avatar_url}
+                            alt="Logo da organização"
+                        />
+                    </div>
+                    <div className="org__details">
+                        <h1 className="org__details__name">{orgObject.name}</h1>
+                        <p className="org__details__description">{orgObject.description}</p>
+                        {orgObject.location &&
+                            <span className="org__details__location">
+                                <img src={locationIcon} alt="Ícone que simboliza um local" />
+                                {orgObject.location}
+                            </span>
+                        }
+                        {orgObject.blog &&
+                            <div className="org__details__blog">
+                                <img src={linkIcon} alt="Ícone que simboliza um link" />
+                                <a href={orgObject.blog} target="_blank">{orgObject.blog}</a>
+                            </div>
+                        }
+                        {orgObject.twitter_username &&
+                            <div className="org__details__twitter">
+                                <img src={twitterIcon} alt="Ícone do twitter" />
+                                <a 
+                                    href={`https://twitter.com/${orgObject.twitter_username}`} 
                                     target="_blank"
                                 >
-                                    <img src={twitterIcon} alt="Ícone do twitter" />
                                     @{orgObject.twitter_username}
                                 </a>
-
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 </header>
+                <div className="repo-search">
+                    <div className="repo-search__bar">
+                        <input
+                            onChange={(e) => {
+                                setInputValue(e.target.value)
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.keyCode === 13) {
+                                    setIsSearch(true)
+                                }
+                            }}
+                            type="text"
+                            placeholder="Buscar"
+                            title="Digite o nome de um repositório"
+                        />
+                        <button onClick={() => {
+                            setIsSearch(true)
+                        }}>
+                            <img src={arrowIcon} />
+                        </button>
+                    </div>
+                    {errorMsg &&
+                        <span className="repo-search__error">
+                            Repositório não encontrado, verifique e tente novamente.
+                        </span>
+                    }
+                </div>
                 <div className="repos">
-                    <h2 className="repos__title">Repositórios</h2>
+                    <h2 className="repos__title">{orgRepos.length > 0 ? "Repositórios" : "Nenhum repositório encontrado"}</h2>
                     <ul className="repos__list">
                         {
                             orgRepos.map(repo => (
@@ -91,18 +158,31 @@ const Repos = () => {
                         }
                     </ul>
                 </div>
-                <ul className="pagination">
-                    {pageCounter !== 1 &&
-                        <li className="pagination__prev" onClick={() => {
-                            if (pageCounter > 1) setPageCounter(pageCounter - 1)
-                        }}>Anterior</li>
-                    }
-                    {orgRepos.length === 10 &&
-                        <li className="pagination__next" onClick={() => {
-                            if (pageCounter >= 1) setPageCounter(pageCounter + 1)
-                        }}>Próxima</li>
-                    }
-                </ul>
+                {returnButton &&
+                    <button
+                        className="return-button"
+                        onClick={() => {
+                            findOrgRepos()
+                        }}>
+                        Voltar
+                    </button>
+                }
+                {!returnButton &&
+                    <ul className="pagination">
+                        {pageCounter !== 1 &&
+                            <li className="pagination__prev" onClick={() => {
+                                if (pageCounter > 1) setPageCounter(pageCounter - 1)
+                            }}>
+                                <button>Anterior</button>
+                            </li>
+                        }
+                        {orgRepos.length === 12 &&
+                            <li className="pagination__next" onClick={() => {
+                                if (pageCounter >= 1) setPageCounter(pageCounter + 1)
+                            }}><button>Próxima</button></li>
+                        }
+                    </ul>
+                }
             </main>
             <Footer />
         </div>

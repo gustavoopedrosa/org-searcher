@@ -13,22 +13,19 @@ const Home = () => {
     const navigate = useNavigate()
     const [inputValue, setInputValue] = useState('')
     const [isOrgTrue, setIsOrgTrue] = useState(true)
-    const [orgInfos, setOrgInfos] = useState({})
-
-    useEffect(() => {
-        localStorage.removeItem('orgInfos')
-    }, [])
-
 
     function handleChange(e) {
         setInputValue(e.target.value)
     }
 
     function handleClick() {
-        fetch(`https://api.github.com/orgs/${inputValue}`)
+        fetch(`https://api.github.com/orgs/${inputValue}`, {
+            headers: {
+                authorization: "token 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"
+              }
+        })
             .then(response => response.json())
             .then(responseJson => validateOrg(responseJson))
-            .then(responseJson => setOrgInfos(responseJson))
     }
 
     function handleKeyDown(e) {
@@ -58,7 +55,7 @@ const Home = () => {
                         onChange={handleChange}
                         className="main__search__input"
                         type="text"
-                        placeholder="Digite o nome da organização"
+                        placeholder="Handle da organização"
                         title="Digite o nome da organização"
                         onKeyDown={handleKeyDown}
                     />

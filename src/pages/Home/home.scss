@@ -13,7 +13,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('../../assets/planet.jpg');
+    background-image: url('../../assets/planet.png');
+    background-color: var(--gray);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -28,22 +29,24 @@
     }
 
     &__search {
-        border: 1px solid white;
-        border-radius: 1rem;
-        padding: 1rem;
         display: flex;
         flex-direction: row;
-        gap: 1rem;
         width: 100%;
-        max-width: 900px;
+        max-width: 850px;
+        height: 60px;
         background-color: white;
 
         &__input {
             border: none;
             flex-grow: 1;
-            font-size: 1.6rem;
-            padding: 0 1rem;
-            width: 100%;
+            font-size: 2rem;
+            font-weight: 800;
+            padding-left: 1rem;
+            color: black;
+        }
+
+        &__input::placeholder {
+            font-weight: 800;
         }
         
         &__input:focus {
@@ -56,10 +59,13 @@
             justify-content: center;
             align-items: center;
             border: none;
-            background-color: white;
+            background-color: var(--green);
+            width: 60px;
+
         
             img {
-                padding: 1rem;
+                filter: invert(1);
+                height: 32px;
             }
 
             img:hover {
@@ -76,7 +82,6 @@
         font-size: 1.5rem;
         background-color: rgba($color: #000000, $alpha: .6);
         padding: 1rem;
-        border-radius: 1rem;
     }
 }
 

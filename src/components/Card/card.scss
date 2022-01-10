@@ -1,6 +1,4 @@
 .repo {
-    border: 1px solid lightgray;
-    border-radius: .7rem;
     padding: 1.5rem;
     display: flex;
     flex-direction: row;
@@ -8,59 +6,58 @@
     align-items: center;
     gap: 2rem;
     width: 100%;
+    flex-grow: 1;
     min-width: 300px;
-    max-width: 600px;
     min-height: 165px;
+    background-color: var(--green);
     
 
     &__name {
-        font-size: 1.5rem;
-        font-weight: 500;
-        color: blue;
-        line-height: 1.5rem;
-        flex-grow: 1;
+        height: 35px;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: white;
+        flex-basis: 100%;
         text-decoration: none;
-    }
-
-    &__privacy {
-        font-size: 1rem;
-        padding: .5rem;
-        border: 1px solid lightgray;
-        border-radius: 2rem;
+        overflow: hidden;
     }
 
     &__description {
-        font-size: 1.2rem;
+        height: 67px;
+        font-size: 1.6rem;
         flex-basis: 100%;
+        overflow: hidden;
+        color: #FFFFFFDD;
     }
 
     &__details {
         display: flex;
         flex-direction: row;
-        gap: 2rem;
+        gap: 3rem;
 
         &__lang {
             display: flex;
             flex-direction: row;
-            font-size: 1.1rem;
+            font-size: 1.6rem;
             align-items: center;
             gap: .5rem;
+            color: var(--dark-green);
         }
 
         &__link {
             display: flex;
             flex-direction: row;
-            font-size: 1.1rem;
+            font-size: 1.6rem;
             align-items: center;
             gap: .5rem;
             text-decoration: none;
-            color: black;
+            color: var(--dark-green);
         }
     }
 }
 
 @media screen and (min-width: 768px) {
     .repo {
-        width: 47%;
+        width: 30%;
     }
 }
