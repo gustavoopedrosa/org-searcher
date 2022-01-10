@@ -11,14 +11,21 @@ const Header = ({ repos }) => {
     return (
         <header className="header">
             {repos &&
-                <img src={iconReturn} className="header__return" onClick={() => {
-                    navigate('/')
-                }} />
+                <img
+                    src={iconReturn}
+                    className="header__return"
+                    onClick={() => {
+                        navigate('/')
+                    }}
+                />
             }
             <div className="header__logo">
-                <h1 className="header__logo__title" onClick={() => {
-                    navigate('/')
-                }}>Org Searcher</h1>
+                <h1
+                    className="header__logo__title"
+                    onClick={() => {
+                        navigate('/')
+                    }}
+                >Org Searcher</h1>
             </div>
         </header>
     )

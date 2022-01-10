@@ -1,11 +1,13 @@
 import React from "react"
+
 import "./card.scss"
-import circIcon from "../../assets/circulo.png"
+
 import starIcon from "../../assets/estrela.png"
 import branchIcon from "../../assets/branch.png"
 
 const Card = ({repo}) => {
 
+    // Transforma os milhares (1000 -> 1k)
     function kFormatter(num) {
         return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
     }

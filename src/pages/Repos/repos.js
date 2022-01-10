@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
-import Card from "../../components/Card/card"
-import Header from "../../components/Header/header"
-import Footer from "../../components/Footer/footer"
 import { useParams } from "react-router-dom"
 
 import "./repos.scss"
+
+import Card from "../../components/Card/card"
+import Header from "../../components/Header/header"
+import Footer from "../../components/Footer/footer"
 
 import locationIcon from "../../assets/local.png"
 import linkIcon from "../../assets/link.png"
@@ -35,21 +36,13 @@ const Repos = () => {
     }, [isSearch])
 
     function findOrg() {
-        fetch(`https://api.github.com/orgs/${orgName}`, {
-            headers: {
-                authorization: `token ${process.env.TOKEN}`
-              }
-        })
+        fetch(`https://api.github.com/orgs/${orgName}`)
             .then(response => response.json())
             .then(responseJson => setOrgObject(responseJson))
     }
 
     function findOrgRepos() {
-        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=12&`, {
-            headers: {
-                authorization: `token ${process.env.TOKEN}`
-              }
-        })
+        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=12&`)
             .then(response => response.json())
             .then(responseJson => setOrgRepos(responseJson))
         setErrorMsg(false)
@@ -58,18 +51,14 @@ const Repos = () => {
 
     function findOneRepo() {
         if (isSearch) {
-            fetch(`https://api.github.com/repos/${orgName}/${inputValue}`, {
-                headers: {
-                    authorization: `token ${process.env.TOKEN}`
-                  }
-            })
+            fetch(`https://api.github.com/repos/${orgName}/${inputValue}`)
                 .then(setIsSearch(false))
                 .then(response => response.json())
-                .then(responseJson => validateRepo([responseJson]))
+                .then(responseJson => validateSearch([responseJson]))
         }
     }
 
-    function validateRepo(repo) {
+    function validateSearch(repo) {
         if (repo[0].name === inputValue) {
             setOrgRepos(repo)
             setErrorMsg(false)
@@ -79,7 +68,6 @@ const Repos = () => {
         } else {
             setErrorMsg(true)
         }
-
     }
 
     return (
@@ -98,7 +86,7 @@ const Repos = () => {
                         <p className="org__details__description">{orgObject.description}</p>
                         {orgObject.location &&
                             <span className="org__details__location">
-                                <img src={locationIcon} alt="Ícone que simboliza um local" />
+                                <img src={locationIcon} alt="Ícone de localização" />
                                 {orgObject.location}
                             </span>
                         }
@@ -163,7 +151,8 @@ const Repos = () => {
                         className="return-button"
                         onClick={() => {
                             findOrgRepos()
-                        }}>
+                        }}
+                    >
                         Voltar
                     </button>
                 }

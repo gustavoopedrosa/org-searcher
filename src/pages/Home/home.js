@@ -14,25 +14,10 @@ const Home = () => {
     const [inputValue, setInputValue] = useState('')
     const [isOrgTrue, setIsOrgTrue] = useState(true)
 
-    function handleChange(e) {
-        setInputValue(e.target.value)
-    }
-
     function handleClick() {
-        fetch(`https://api.github.com/orgs/${inputValue}`, {
-            headers: {
-                authorization: `token ${process.env.TOKEN}`
-              }
-        })
+        fetch(`https://api.github.com/orgs/${inputValue}`)
             .then(response => response.json())
             .then(responseJson => validateOrg(responseJson))
-    }
-
-    function handleKeyDown(e) {
-        if (e.keyCode === 13) {
-            handleClick()
-        }
-        return
     }
 
     function validateOrg(orgObject) {
@@ -52,21 +37,27 @@ const Home = () => {
                 </p>
                 <div className="main__search">
                     <input
-                        onChange={handleChange}
+                        onKeyDown={(e) => {
+                            if (e.keyCode === 13) {
+                                handleClick()
+                            }
+                        }}
+                        onChange={(e) => {
+                            setInputValue(e.target.value)
+                        }}
                         className="main__search__input"
                         type="text"
                         placeholder="Handle da organização"
                         title="Digite o nome da organização"
-                        onKeyDown={handleKeyDown}
                     />
                     <button
-                        className="main__search__button"
                         onClick={handleClick}
+                        className="main__search__button"
                     >
                         <img src={arrowIcon} />
                     </button>
                 </div>
-                {!isOrgTrue === true &&
+                {!isOrgTrue &&
                     <span className="main__error">
                         Organização não encontrada, verifique e tente novamente.
                     </span>
