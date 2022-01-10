@@ -21,7 +21,7 @@
         user-select: none;
 
         &__title {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 800;
             text-transform: uppercase;
         }
@@ -33,7 +33,7 @@
 
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
     .header {
         padding: 2rem;
         max-width: 1350px;

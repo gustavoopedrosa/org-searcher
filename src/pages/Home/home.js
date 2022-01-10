@@ -19,11 +19,13 @@ const Home = () => {
     }
 
     function handleClick() {
-        fetch(`https://api.github.com/orgs/${inputValue}`, {
-            headers: {
-                authorization: "token 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"
-              }
-        })
+        fetch(`https://api.github.com/orgs/${inputValue}`
+        // , {
+        //     headers: {
+        //         authorization: "token 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"
+        //       }
+        // }
+        )
             .then(response => response.json())
             .then(responseJson => validateOrg(responseJson))
     }

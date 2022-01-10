@@ -58,6 +58,14 @@
 
 @media screen and (min-width: 768px) {
     .repo {
-        width: 30%;
+        width: 48.62%;
+        flex-grow: 0;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .repo {
+        width: 31.978%;
+        flex-grow: 0;
     }
 }

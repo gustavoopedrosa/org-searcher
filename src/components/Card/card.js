@@ -6,6 +6,10 @@ import branchIcon from "../../assets/branch.png"
 
 const Card = ({repo}) => {
 
+    function kFormatter(num) {
+        return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+    }
+
     return (
         <li className="repo">
                 <a className="repo__name" href={repo.html_url} target="_blank">{repo.name}</a>
@@ -16,11 +20,11 @@ const Card = ({repo}) => {
                     </span>
                     <div className="repo__details__link">
                         <img src={starIcon} alt="Ícone de estrela" />
-                        {repo.stargazers_count}
+                        {kFormatter(repo.stargazers_count)}
                     </div>
                     <div className="repo__details__link">
                         <img src={branchIcon} alt="Ícone de branch"/>
-                        {repo.forks}
+                        {kFormatter(repo.forks)}
                     </div>
                 </div>
         </li>

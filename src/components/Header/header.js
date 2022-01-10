@@ -18,7 +18,7 @@ const Header = ({ repos }) => {
             <div className="header__logo">
                 <h1 className="header__logo__title" onClick={() => {
                     navigate('/')
-                }}>Org Seacher</h1>
+                }}>Org Searcher</h1>
             </div>
         </header>
     )

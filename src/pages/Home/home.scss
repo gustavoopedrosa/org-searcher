@@ -39,10 +39,11 @@
         &__input {
             border: none;
             flex-grow: 1;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             padding-left: 1rem;
             color: black;
+            overflow: hidden;
         }
 
         &__input::placeholder {
@@ -85,7 +86,7 @@
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
     .main {
         padding: 0 3rem 26rem 3rem;
 

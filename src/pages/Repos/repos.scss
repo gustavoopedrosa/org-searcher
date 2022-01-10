@@ -1,9 +1,11 @@
 .repos-wrapper {
     width: 100%;
+    min-height: 100vh;
 }
 
 .container {
     width: 100%;
+    min-height: 83vh;
     background-color: var(--gray);
 }
 
@@ -84,8 +86,8 @@
     margin: 2rem 0;
     gap: .5rem;
     width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
+    max-width: 1350px;
+    margin: 2rem auto;
     padding: 0 2rem;
 
     &__bar {
@@ -150,7 +152,7 @@
     padding: 1rem;
     background-color: var(--green);
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 3rem auto;
 }
 
 .return-button:hover {
@@ -160,8 +162,8 @@
 }
 
 .repos {
-    max-width: 1280px;
-    margin: 0 auto;
+    max-width: 1350px;
+    margin: 2rem auto;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -216,8 +218,31 @@
         &__list {
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
             gap: 2rem;
+            justify-content: left;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .org {
+
+        justify-content: left;
+        padding: 0 2rem;
+
+        &__img {
+            display: flex;
+            flex-direction: center;
+            align-items: center;
+            
+            img {
+                width: 185px;
+                height: 185px;
+            }
+        }
+
+        &__details {
+            width: 81%;
         }
     }
 }
