@@ -35,25 +35,21 @@ const Repos = () => {
     }, [isSearch])
 
     function findOrg() {
-        fetch(`https://api.github.com/orgs/${orgName}`
-        // , {
-        //     headers: {
-        //         authorization: "token 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"
-        //     }
-        // }
-        )
+        fetch(`https://api.github.com/orgs/${orgName}`, {
+            headers: {
+                authorization: `token ${process.env.TOKEN}`
+              }
+        })
             .then(response => response.json())
             .then(responseJson => setOrgObject(responseJson))
     }
 
     function findOrgRepos() {
-        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=12&`
-        // , {
-        //     headers: {
-        //         authorization: "token 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"
-        //     }
-        // }
-        )
+        fetch(`https://api.github.com/orgs/${orgName}/repos?page=${pageCounter}&per_page=12&`, {
+            headers: {
+                authorization: `token ${process.env.TOKEN}`
+              }
+        })
             .then(response => response.json())
             .then(responseJson => setOrgRepos(responseJson))
         setErrorMsg(false)
@@ -62,13 +58,11 @@ const Repos = () => {
 
     function findOneRepo() {
         if (isSearch) {
-            fetch(`https://api.github.com/repos/${orgName}/${inputValue}`
-            // , {
-            //     headers: {
-            //         authorization: "token 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"
-            //     }
-            // }
-            )
+            fetch(`https://api.github.com/repos/${orgName}/${inputValue}`, {
+                headers: {
+                    authorization: `token ${process.env.TOKEN}`
+                  }
+            })
                 .then(setIsSearch(false))
                 .then(response => response.json())
                 .then(responseJson => validateRepo([responseJson]))

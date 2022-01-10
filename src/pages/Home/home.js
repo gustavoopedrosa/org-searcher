@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import { useNavigate } from "react-router-dom"
 
 import "./home.scss"
@@ -19,13 +19,11 @@ const Home = () => {
     }
 
     function handleClick() {
-        fetch(`https://api.github.com/orgs/${inputValue}`
-        // , {
-        //     headers: {
-        //         authorization: "token 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"
-        //       }
-        // }
-        )
+        fetch(`https://api.github.com/orgs/${inputValue}`, {
+            headers: {
+                authorization: `token ${process.env.TOKEN}`
+              }
+        })
             .then(response => response.json())
             .then(responseJson => validateOrg(responseJson))
     }
